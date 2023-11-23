@@ -4,8 +4,8 @@ Este repositorio, denominado DonGalleto_Core, alberga el código fuente del back
 ## Estructura del Proyecto
 El proyecto está organizado de la siguiente manera:
 
-src/: Contiene el código fuente Java del backend.
-lib/: Bibliotecas externas utilizadas.
+- src/: Contiene el código fuente Java del backend.
+- lib/: Bibliotecas externas utilizadas.
 
 # Requisitos
 Asegúrate de tener instalados los siguientes componentes antes de ejecutar el proyecto:
