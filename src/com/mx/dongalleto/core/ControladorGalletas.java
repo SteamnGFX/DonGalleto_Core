@@ -54,6 +54,7 @@ public class ControladorGalletas {
             galleta.setCantidad(rs.getInt("cantidad"));
             galleta.setDescripcion(rs.getString("descripcion"));
             galleta.setFotografia(rs.getString("fotografia"));
+            galleta.setPrecio(rs.getFloat("precio"));
 
             return galleta;
         }
@@ -61,7 +62,7 @@ public class ControladorGalletas {
 
     public void insert(Galleta g) throws Exception {
         //Definimos la consulta SQL que invoca al Stored Procedure:
-        String sql = "{call InsertarGalleta(?,?,?,?,?)}";    // 4
+        String sql = "{call InsertarGalleta(?,?,?,?,?,?)}";    // 4
 
         int idGalletaGenerada = -1;
 
@@ -80,13 +81,15 @@ public class ControladorGalletas {
         cstmt.setString(2, g.getNombre());
         cstmt.setString(3, g.getDescripcion());
         cstmt.setString(4, g.getFotografia());
+        cstmt.setFloat(5, g.getPrecio());
+        
 
-        cstmt.registerOutParameter(5, Types.INTEGER);
+        cstmt.registerOutParameter(6, Types.INTEGER);
 
         cstmt.executeUpdate();
 
         //Recuperamos los ID's generados:
-        idGalletaGenerada = cstmt.getInt(5);
+        idGalletaGenerada = cstmt.getInt(6);
 
         g.setIdGalleta(idGalletaGenerada);
 
@@ -97,7 +100,7 @@ public class ControladorGalletas {
 
     public void update(Galleta g) throws Exception {
         //Definimos la consulta SQL que invoca al Stored Procedure:
-        String sql = "{call ActualizarGalleta(?,?,?,?,?)}";// 32 IDs
+        String sql = "{call ActualizarGalleta(?,?,?,?,?,?)}";// 32 IDs
 
         //Con este objeto nos vamos a conectar a la Base de Datos:
         ConexionMySQL connMySQL = new ConexionMySQL();
@@ -115,6 +118,7 @@ public class ControladorGalletas {
         cstmt.setString(3, g.getNombre());
         cstmt.setString(4, g.getDescripcion());
         cstmt.setString(5, g.getFotografia());
+        cstmt.setFloat(6, g.getPrecio());
 
         //Ejecutamos el Stored Procedure:
         cstmt.executeUpdate();
